@@ -16,8 +16,12 @@
 using namespace std;
 
 char box[3][3] = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
+char turn = 'X';
+int row, column;
+bool  draw=false;
 
 void board() {
+	system("cls");
 	cout << "\t\t" << box[0][0] << " | " << box[0][1] << " | " << box[0][2] << endl;
 	cout << "\t\t" << "--" << "|" << "--" << " |" << "--" << endl;
 	cout << "\t\t" << box[1][0] << " | " << box[1][1] << " | " << box[1][2] << endl;
@@ -25,60 +29,97 @@ void board() {
 	cout << "\t\t" << box[2][0] << " | " << box[2][1] << " | " << box[2][2] << endl;
 }
 
-void choose(int choice) {
-
+void choose() {
+	int choice;
+	if (turn == 'X') {
+		cout << "player X turn: ";
+		cin >> choice;
+	}
+	if (turn == 'Y') {
+		cout << "player Y turn: ";
+		cin >> choice;
+	}
 	switch (choice) {
 	case 1:
-		box[0][0] = 'X'; break;
+		row = 0; column = 0; break;
 	case 2:
-		box[0][1] = 'X'; break;
+		row = 0; column = 1; break;
 	case 3:
-		box[0][2] = 'X'; break;
+		row = 0; column = 2; break;
 	case 4:
-		box[1][0] = 'X'; break;
+		row = 1; column = 0; break;
 	case 5:
-		box[1][1] = 'X'; break;
+		row = 1; column = 1; break;
 	case 6:
-		box[1][2] = 'X'; break;
+		row = 1; column = 2; break;
 	case 7:
-		box[2][0] = 'X'; break;
+		row = 2; column = 0; break;
 	case 8:
-		box[2][1] = 'X'; break;
+		row = 2; column=1; break;
 	case 9:
-		box[2][2] = 'X'; break;
+		row = 2; column = 2; break;
 	default:
 		cout << "invalid number";
 		break;
 	}
+	if (turn == 'X' && box[row][column] != 'X' && box[row][column] != 'Y') {
+		box[row][column] = 'X';
+		turn = 'Y';
+	}
+	else if (turn == 'Y' && box[row][column] != 'X' && box[row][column] != 'Y') {
+		box[row][column] = 'Y';
+		turn = 'X';
+	}
+	else {
+		cout << "please select another number";
+		choose();
+	}
 	board();
 }
 bool game() {
-	int i, j;
-	for (i = 0; i < 3; i++) {
-		for (j = 0; j < 3; j++) {
-			if (i == j && box[i][j] == 'X') {
+	
+
+		for (int i = 0; i < 3; i++) {
+			if (box[0][i] == box[1][i] && box[0][i] == box[2][i] || box[i][0] == box[i][1] && box[i][0] == box[i][2]) {
 				return false;
 			}
-			else {
-				choose();
+		}
+		if (box[0][0] == box[1][1] && box[0][0] == box[2][2] || box[0][2] == box[1][1] && box[0][2] == box[2][0]) {
+			return false;
+		}
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (box[i][j] != 'X' && box[i][j] != 'Y') {
+					
+					return true;
+				}
 			}
 		}
+		if (draw == true) {
+			return false;
+		}
+		
+		
 	}
-}
+		
 
 int main()
 {
-	int choice,choice2;
+	while (game()) {
+		board();
+		choose();
+		
 
-
-	board();
-	cout << "player[x] turn:";
-	cin >> choice;
-	choose(choice);
-	cout << "player[o] turn:";
-	cin >> choice2;
-	choose2(choice2);
-
+	}
+	if (turn == 'X' && draw == false) {
+		cout << "player 2[Y] WINS!!!" << endl;
+	}
+	else if (turn == 'Y' && draw == false) {
+		cout << "player 1[X] WINS!!!" << endl;
+	}
+	else {
+		cout << "GAME DRAW!!" << endl;
+	}
 	return 0;
 	
 }
