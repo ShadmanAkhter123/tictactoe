@@ -30,6 +30,8 @@ void introduction() {
 	cout << "  7  |  8  |  9   \n";
 	cout << "     |     |      \n\n";
 
+}
+
 
 	bool is_winner()
 	{
@@ -52,38 +54,46 @@ void introduction() {
 		else if ((board[1] == board[4]) && (board[4] == board[7]) && (board[1] != " ")) {
 			winner = true;
 		}
-		else if ((board[2] == board[5]) && (board[5]) == (board[7]) && (board[2] != " ") {
+		else if ((board[2] == board[5]) && (board[5] == board[7]) && (board[2] != " ")) {
 			winner = true;
 
 		}
-
-
 		//checking the diagonals
-		else if ((board[0] == board[4]) && (board[4]) == (board[8]) && (board[0] != " ") {
+		else if ((board[0] == board[4]) && (board[4] == board[8]) && (board[0] != " ")) {
 			winner = true;
 
 		}
-		else if ((board[2] == board[4]) && (board[4]) == (board[6]) && (board[2] != " ") {
+		else if ((board[2] == board[4]) && (board[4] == board[6]) && (board[2] != " ")) {
 			winner = true;
 
 		}
 
 		return winner;
 	}
-	bool filled_up() {
+
+
+	bool filled_up()
+	{
 		bool filled = true;
-			for (i = 0; i < 9; i++) {
+			for (int i = 0; i < 9; i++) {
 				if (board[i] == " ") {
 					filled = false;
 				}
 			}
-		return 0;
+		return filled;
 	}
-	void draw() {
+
+
+	void draw()
+	{
+		system("cls");
 		cout << "     |     |      \n";
+		
 		cout << "  " << board[0] << "  |" << "  " << board[1] << "  |" << "  " << board[2] << "\n";
+		cout << "-----|-----|-----\n";
 		cout << "     |     |      \n";
 		cout << "  " << board[3] << "  |" << "  " << board[4] << "  |" << "  " << board[5] << "\n";
+		cout << "-----|-----|-----\n";
 		cout << "     |     |      \n";
 		cout << "  " << board[6] << "  |" << "  " << board[7] << "  |" << "  " << board[8] << "\n";
 		cout << "\n";
@@ -91,7 +101,7 @@ void introduction() {
 
 	void set_position()
 	{
-		cout << "player's" << player << " enter(1:9)";
+		cout << "player's" << player << " enter(1:9): ";
 		while (!(cin >> position)) //while not interger....counter for if anyone inputs something other than integer value
 		 {
 			cout << "please enter a valid number between 1 to 9"<<endl;
@@ -99,6 +109,8 @@ void introduction() {
 			cin.ignore(); //will
 			//together they solve the problem of it running infinitely 
 		}
+		cout << endl;
+
 		while (board[position - 1] != " ")	//while position not space....if the position is not blank 
 		{
 			cout << "Oops, that position is already filled\nTry again \n";
@@ -108,6 +120,8 @@ void introduction() {
 
 		}
 	}
+
+
 	void upload_board() 
 	{
 		if (player % 2 == 1) //player number determiner....1 mod 2....for integer there can be no decimal number so, if you are to divide 2 by 1...it has to be 2*0=0...1-0 equals to 1 
@@ -118,6 +132,8 @@ void introduction() {
 			board[position - 1] = 'O';
 		}
 	}
+
+
 	void change_player()
 	{
 		if (player == 1) {
@@ -128,15 +144,19 @@ void introduction() {
 			player--;
 		}
 	}
+
+
 	void take_turn() {
-		if (!is_winner() && !filled_up())
+		while(!is_winner() && !filled_up())
 		{
 			set_position();
-			update_board();
+			upload_board();
 			change_player();
 			draw();
 		}
 	}
+
+
 	void end_game()
 	{
 		if (is_winner())
@@ -149,4 +169,4 @@ void introduction() {
 		}
 	}
 		
-}
+

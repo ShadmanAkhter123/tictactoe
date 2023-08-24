@@ -1,0 +1,5 @@
+﻿  tictactoe-2.cpp
+tictactoe-2.obj : error LNK2019: unresolved external symbol "void __cdecl introduction(void)" (?introduction@@YAXXZ) referenced in function main
+tictactoe-2.obj : error LNK2019: unresolved external symbol "void __cdecl take_turn(void)" (?take_turn@@YAXXZ) referenced in function main
+tictactoe-2.obj : error LNK2019: unresolved external symbol "void __cdecl end_game(void)" (?end_game@@YAXXZ) referenced in function main
+D:\code\visual basic code\Tictactoe-2\tictactoe-2\x64\Debug\tictactoe-2.exe : fatal error LNK1120: 3 unresolved externals
